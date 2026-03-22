@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SEO Authority Playbook — Managed Content Systems for Expert-Led Businesses</title>
+  <meta name="description" content="We build and run the entire content publishing system for expert-led businesses — SEO-strategic, brand-voiced, and delivered on schedule.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --cream: #f2ece0;
+      --ink: #1c1712;
+      --bronze: #8b5e3c;
+      --bronze-light: #a8764f;
+      --sage: #3d5a4c;
+      --sage-light: #4a6e5b;
+      --card-bg: rgba(255,255,255,0.06);
+      --card-border: rgba(139,94,60,0.18);
+      --glass: rgba(28,23,18,0.82);
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Lora', Georgia, serif;
+      --font-mono: 'IBM Plex Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.7;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Noise texture overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* ===== UTILITY ===== */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+    .accent { color: var(--bronze); }
+    .italic { font-style: italic; }
+
+    /* Reveal animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== NAVIGATION ===== */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 1.2rem 2rem;
+      background: rgba(242, 236, 224, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(28,23,18,0.06);
+      transition: all 0.3s ease;
+    }
+    nav.scrolled {
+      padding: 0.8rem 2rem;
+      box-shadow: 0 1px 20px rgba(28,23,18,0.06);
+    }
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    .nav-logo span { color: var(--bronze); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ink);
+      text-decoration: none;
+      opacity: 0.7;
+      transition: opacity 0.3s;
+    }
+    .nav-links a:hover { opacity: 1; }
+    .nav-cta {
+      background: var(--ink) !important;
+      color: var(--cream) !important;
+      padding: 0.6rem 1.4rem !important;
+      border-radius: 4px;
+      opacity: 1 !important;
+      transition: background 0.3s !important;
+    }
+    .nav-cta:hover { background: var(--bronze) !important; }
+
+    /* Mobile menu */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 28px;
+      height: 20px;
+      position: relative;
+      z-index: 1001;
+    }
+    .menu-toggle span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: var(--ink);
+      position: absolute;
+      left: 0;
+      transition: all 0.3s;
+    }
+    .menu-toggle span:nth-child(1) { top: 0; }
+    .menu-toggle span:nth-child(2) { top: 9px; }
+    .menu-toggle span:nth-child(3) { top: 18px; }
+    .menu-toggle.active span:nth-child(1) { top: 9px; transform: rotate(45deg); }
+    .menu-toggle.active span:nth-child(2) { opacity: 0; }
+    .menu-toggle.active span:nth-child(3) { top: 9px; transform: rotate(-45deg); }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 8rem 2rem 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -10%;
+      right: -15%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(139,94,60,0.08) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 4rem;
+      align-items: center;
+      width: 100%;
+    }
+    .hero-text h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 5.5vw, 4.2rem);
+      font-weight: 500;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+      color: var(--ink);
+    }
+    .hero-text p {
+      font-size: 1.1rem;
+      color: rgba(28,23,18,0.72);
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+      line-height: 1.8;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--ink);
+      color: var(--cream);
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 4px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .btn-primary:hover { background: var(--bronze); transform: translateY(-1px); }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: transparent;
+      color: var(--ink);
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 1rem 2rem;
+      border: 1.5px solid rgba(28,23,18,0.2);
+      border-radius: 4px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .btn-secondary:hover { border-color: var(--bronze); color: var(--bronze); }
+
+    /* Hero cards */
+    .hero-cards {
+      position: relative;
+      height: 380px;
+    }
+    .hero-card {
+      position: absolute;
+      width: 320px;
+      padding: 2rem;
+      background: white;
+      border: 1px solid rgba(28,23,18,0.08);
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(28,23,18,0.08);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .hero-card:nth-child(1) { top: 0; left: 10%; transform: rotate(-3deg); z-index: 3; }
+    .hero-card:nth-child(2) { top: 60px; left: 25%; transform: rotate(1.5deg); z-index: 2; }
+    .hero-card:nth-child(3) { top: 120px; left: 15%; transform: rotate(-1deg); z-index: 1; }
+    .hero-card:hover { transform: rotate(0deg) translateY(-8px) !important; z-index: 10; }
+    .hero-card-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--bronze);
+      margin-bottom: 0.5rem;
+    }
+    .hero-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .hero-card p {
+      font-size: 0.88rem;
+      color: rgba(28,23,18,0.6);
+      line-height: 1.6;
+    }
+
+    /* ===== PROBLEM STRIP ===== */
+    .problem-strip {
+      background: var(--ink);
+      color: var(--cream);
+      padding: 5rem 2rem;
+    }
+    .problem-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3rem;
+    }
+    .problem-col {
+      position: relative;
+      padding-right: 2rem;
+    }
+    .problem-col:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: rgba(242,236,224,0.1);
+    }
+    .problem-col .label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--bronze);
+      margin-bottom: 1rem;
+    }
+    .problem-col h3 {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 500;
+      margin-bottom: 0.8rem;
+      line-height: 1.3;
+    }
+    .problem-col p {
+      font-size: 0.92rem;
+      opacity: 0.7;
+      line-height: 1.7;
+    }
+
+    /* ===== SERVICES ===== */
+    .services {
+      padding: 7rem 2rem;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .section-header h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    .section-header p {
+      font-size: 1rem;
+      color: rgba(28,23,18,0.6);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .services-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .service-card {
+      padding: 2.2rem;
+      border: 1px solid rgba(28,23,18,0.08);
+      border-radius: 12px;
+      background: white;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--bronze), var(--sage));
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 50px rgba(28,23,18,0.08);
+      border-color: rgba(139,94,60,0.15);
+    }
+    .service-card:hover::before { opacity: 1; }
+    .service-number {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--bronze);
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .service-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+      line-height: 1.3;
+    }
+    .service-card p {
+      font-size: 0.88rem;
+      color: rgba(28,23,18,0.6);
+      line-height: 1.7;
+      margin-bottom: 1.2rem;
+    }
+    .service-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .service-tags span {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 0.3rem 0.7rem;
+      background: rgba(61,90,76,0.07);
+      color: var(--sage);
+      border-radius: 3px;
+    }
+
+    /* ===== HOW IT WORKS ===== */
+    .how-it-works {
+      padding: 7rem 2rem;
+      background: rgba(61,90,76,0.04);
+    }
+    .steps {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .steps::before {
+      content: '';
+      position: absolute;
+      left: 28px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--bronze), var(--sage));
+      opacity: 0.2;
+    }
+    .step {
+      display: flex;
+      gap: 2.5rem;
+      margin-bottom: 3.5rem;
+      position: relative;
+    }
+    .step:last-child { margin-bottom: 0; }
+    .step-number {
+      flex-shrink: 0;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: var(--ink);
+      color: var(--cream);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      letter-spacing: 0.05em;
+      position: relative;
+      z-index: 2;
+    }
+    .step-content h3 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+      padding-top: 0.4rem;
+    }
+    .step-content p {
+      font-size: 0.95rem;
+      color: rgba(28,23,18,0.65);
+      line-height: 1.8;
+      max-width: 550px;
+    }
+
+    /* ===== QUOTE ===== */
+    .quote-section {
+      padding: 6rem 2rem;
+      text-align: center;
+      background: var(--ink);
+      color: var(--cream);
+      position: relative;
+      overflow: hidden;
+    }
+    .quote-section::before {
+      content: '\201C';
+      font-family: var(--font-display);
+      font-size: 20rem;
+      position: absolute;
+      top: -3rem;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0.04;
+      color: var(--bronze);
+      pointer-events: none;
+    }
+    .quote-section blockquote {
+      font-family: var(--font-display);
+      font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+      font-weight: 400;
+      font-style: italic;
+      max-width: 750px;
+      margin: 0 auto 1.5rem;
+      line-height: 1.6;
+      position: relative;
+    }
+    .quote-section cite {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--bronze);
+      font-style: normal;
+    }
+
+    /* ===== WHY IT WORKS ===== */
+    .why-section {
+      padding: 7rem 2rem;
+    }
+    .why-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2.5rem;
+    }
+    .why-card {
+      padding: 2.5rem;
+      border: 1px solid rgba(28,23,18,0.08);
+      border-radius: 12px;
+      background: white;
+      transition: all 0.3s;
+    }
+    .why-card:hover {
+      border-color: rgba(139,94,60,0.2);
+      box-shadow: 0 10px 40px rgba(28,23,18,0.05);
+    }
+    .why-card .why-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(61,90,76,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.2rem;
+    }
+    .why-card .why-icon svg {
+      width: 22px;
+      height: 22px;
+      stroke: var(--sage);
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .why-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 600;
+      margin-bottom: 0.7rem;
+    }
+    .why-card p {
+      font-size: 0.9rem;
+      color: rgba(28,23,18,0.6);
+      line-height: 1.75;
+    }
+
+    /* ===== CONSULT SECTION ===== */
+    .consult-section {
+      padding: 7rem 2rem;
+      background: rgba(61,90,76,0.04);
+    }
+    .consult-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .consult-info h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.2rem;
+      line-height: 1.25;
+    }
+    .consult-info > p {
+      font-size: 0.95rem;
+      color: rgba(28,23,18,0.65);
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+    .consult-info ul {
+      list-style: none;
+      margin-bottom: 0;
+    }
+    .consult-info ul li {
+      position: relative;
+      padding-left: 1.6rem;
+      margin-bottom: 0.7rem;
+      font-size: 0.92rem;
+      color: rgba(28,23,18,0.7);
+    }
+    .consult-info ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.55rem;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--sage);
+      opacity: 0.5;
+    }
+
+    /* Form */
+    .consult-form-wrapper {
+      background: white;
+      border: 1px solid rgba(28,23,18,0.08);
+      border-radius: 16px;
+      padding: 2.5rem;
+      box-shadow: 0 20px 60px rgba(28,23,18,0.06);
+    }
+    .consult-form-wrapper h3 {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 1.8rem;
+      text-align: center;
+    }
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+    .form-group label {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(28,23,18,0.6);
+      margin-bottom: 0.4rem;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      border: 1.5px solid rgba(28,23,18,0.12);
+      border-radius: 8px;
+      background: rgba(242,236,224,0.3);
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.3s;
+      -webkit-appearance: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--bronze);
+    }
+    .form-group textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+    .form-group select {
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%231c1712' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      padding-right: 2.5rem;
+    }
+    .form-footer {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: rgba(28,23,18,0.45);
+      text-align: center;
+      margin-top: 0.8rem;
+    }
+    .btn-submit {
+      width: 100%;
+      margin-top: 0.5rem;
+      background: var(--ink);
+      color: var(--cream);
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 1.1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .btn-submit:hover { background: var(--bronze); }
+
+    /* Confirmation */
+    .form-confirmation {
+      display: none;
+      text-align: center;
+      padding: 2rem 0;
+    }
+    .form-confirmation.active { display: block; }
+    .form-confirmation .check-icon {
+      width: 64px;
+      height: 64px;
+      background: rgba(61,90,76,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+    }
+    .form-confirmation .check-icon svg {
+      width: 28px;
+      height: 28px;
+      stroke: var(--sage);
+      fill: none;
+      stroke-width: 2.5;
+    }
+    .form-confirmation h3 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      margin-bottom: 0.8rem;
+    }
+    .form-confirmation p {
+      font-size: 0.9rem;
+      color: rgba(28,23,18,0.6);
+      margin-bottom: 1.5rem;
+      line-height: 1.7;
+    }
+    .form-confirmation .next-steps {
+      text-align: left;
+      background: rgba(61,90,76,0.04);
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+    }
+    .form-confirmation .next-steps dt {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--sage);
+      margin-bottom: 0.2rem;
+      margin-top: 1rem;
+    }
+    .form-confirmation .next-steps dt:first-child { margin-top: 0; }
+    .form-confirmation .next-steps dd {
+      font-size: 0.88rem;
+      color: rgba(28,23,18,0.65);
+      line-height: 1.6;
+    }
+    .form-confirmation .back-link {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--bronze);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+    }
+    .form-confirmation .back-link:hover { text-decoration: underline; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--ink);
+      color: var(--cream);
+      padding: 2.5rem 2rem;
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 600;
+    }
+    .footer-logo span {
+      color: var(--bronze);
+      font-style: italic;
+    }
+    .footer-note {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      opacity: 0.5;
+      letter-spacing: 0.04em;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .nav-links {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(242,236,224,0.98);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        z-index: 999;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { font-size: 1rem; }
+      .menu-toggle { display: block; }
+
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-cards { display: none; }
+      .hero { min-height: auto; padding: 7rem 2rem 4rem; }
+
+      .problem-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .problem-col:not(:last-child)::after { display: none; }
+      .problem-col { padding-right: 0; }
+
+      .services-grid { grid-template-columns: 1fr; }
+
+      .why-grid { grid-template-columns: 1fr; }
+
+      .consult-grid { grid-template-columns: 1fr; }
+
+      .footer-inner { flex-direction: column; gap: 0.8rem; text-align: center; }
+    }
+    @media (max-width: 600px) {
+      .hero-text h1 { font-size: 2.2rem; }
+      .hero-buttons { flex-direction: column; }
+      .btn-primary, .btn-secondary { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">SEO <span>Authority</span> Playbook</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#how">How It Works</a></li>
+        <li><a href="#why">Why It Works</a></li>
+        <li><a href="#consult">Book a Consult</a></li>
+        <li><a href="#consult" class="nav-cta">Request a Consultation</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-text reveal">
+        <h1>Your expertise deserves to be <em class="accent italic">heard.</em></h1>
+        <p>We build and run the entire content publishing system for expert-led businesses&nbsp;&mdash; SEO-strategic, brand-voiced, and delivered on schedule. Month after month. No managing writers. No chasing deadlines.</p>
+        <div class="hero-buttons">
+          <a href="#consult" class="btn-primary">Request a Consultation &rarr;</a>
+          <a href="#services" class="btn-secondary">See the Services</a>
+        </div>
+      </div>
+      <div class="hero-cards reveal">
+        <div class="hero-card">
+          <div class="hero-card-label">SEO Blog Content</div>
+          <h3>Keyword-Built, Publish-Ready.</h3>
+          <p>Each post built from research&nbsp;&mdash; PAA data, topic clusters, and semantic entities&nbsp;&mdash; before a single word is written.</p>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card-label">Brand Voice Architecture</div>
+          <h3>Sounds Like You. Every Time.</h3>
+          <p>A structured Brand Voice Document governs every piece&nbsp;&mdash; tone, vocabulary, and cadence&nbsp;&mdash; not guesswork.</p>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card-label">Ghost-Written Assets</div>
+          <h3>Ebooks. Guides. Lead Magnets.</h3>
+          <p>Long-form ghost-written digital assets that build authority and generate leads.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM STRIP -->
+  <section class="problem-strip">
+    <div class="problem-grid">
+      <div class="problem-col reveal">
+        <div class="label">The Problem</div>
+        <h3>Content droughts are expensive.</h3>
+        <p>Experts go invisible not because they lack ideas&nbsp;&mdash; but because consistent, optimized publishing is too time-intensive to maintain alongside real client work.</p>
+      </div>
+      <div class="problem-col reveal">
+        <div class="label">The Broken Fix</div>
+        <h3>Freelancers. Mills. DIY&nbsp;AI.</h3>
+        <p>Freelancers are slow and expensive. Content mills are generic. DIY AI output doesn&rsquo;t rank because it was never built on real SEO architecture.</p>
+      </div>
+      <div class="problem-col reveal">
+        <div class="label">The Pipeline Difference</div>
+        <h3>A system, not a vendor.</h3>
+        <p>Fully managed. Strategically researched. Brand-accurate before delivery. An infrastructure service&nbsp;&mdash; not a content order form.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="section-header reveal">
+      <h2>What We Deliver&nbsp;&mdash; Services built for <em class="accent italic">scale</em> without the overhead.</h2>
+      <p>Every service is available as part of a tailored engagement. Book a consultation to discuss which combination fits your business.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <span class="service-number">01</span>
+        <h3>SEO-Optimized Blog Content</h3>
+        <p>Research-first blog posts built around target keywords, people-also-ask data, and semantic entity mapping&nbsp;&mdash; formatted and ready to publish.</p>
+        <div class="service-tags">
+          <span>Keyword Research</span><span>PAA Integration</span><span>Publish-Ready</span>
+        </div>
+      </div>
+      <div class="service-card reveal">
+        <span class="service-number">02</span>
+        <h3>Pillar Page &amp; Topic Cluster Strategy</h3>
+        <p>Full topical authority architecture&nbsp;&mdash; pillar pages anchoring a mapped cluster of supporting content&nbsp;&mdash; so Google understands your site&rsquo;s expertise at depth.</p>
+        <div class="service-tags">
+          <span>Cluster Mapping</span><span>Internal Linking</span><span>Topical Authority</span>
+        </div>
+      </div>
+      <div class="service-card reveal">
+        <span class="service-number">03</span>
+        <h3>Ghost-Written Ebooks &amp; Digital Assets</h3>
+        <p>Long-form ghost-written assets&nbsp;&mdash; ebooks, authority guides, lead magnets&nbsp;&mdash; suitable for self-publishing, gated downloads, or course companion materials. Your ideas, your name, your authority.</p>
+        <div class="service-tags">
+          <span>15,000&ndash;40,000+ Words</span><span>Self-Publish Ready</span><span>Lead Magnet Formats</span><span>Course Companion</span>
+        </div>
+      </div>
+      <div class="service-card reveal">
+        <span class="service-number">04</span>
+        <h3>Content Calendar &amp; Monthly Strategy</h3>
+        <p>A structured monthly publishing roadmap aligned to your SEO goals, audience intent stages, and business objectives&nbsp;&mdash; delivered for approval before production begins.</p>
+        <div class="service-tags">
+          <span>30-Day Calendar</span><span>Intent Mapping</span>
+        </div>
+      </div>
+      <div class="service-card reveal">
+        <span class="service-number">05</span>
+        <h3>Brand Voice Architecture</h3>
+        <p>A structured Brand Voice Document built during onboarding that governs all content production&nbsp;&mdash; tone parameters, vocabulary preferences, and audience framing&nbsp;&mdash; so every deliverable sounds forensically like you.</p>
+        <div class="service-tags">
+          <span>Voice Doc</span><span>Tone Framework</span><span>QA Standard</span>
+        </div>
+      </div>
+      <div class="service-card reveal">
+        <span class="service-number">06</span>
+        <h3>LinkedIn Content Adaptation</h3>
+        <p>Blog content repurposed into platform-native LinkedIn posts&nbsp;&mdash; each reframed for the LinkedIn algorithm, audience, and scroll context&nbsp;&mdash; turning one production cycle into multi-channel visibility.</p>
+        <div class="service-tags">
+          <span>Repurposing</span><span>Native Format</span><span>Monthly Batch</span>
+        </div>
+      </div>
+      <div class="service-card reveal">
+        <span class="service-number">07</span>
+        <h3>Email Newsletter Drafting</h3>
+        <p>Monthly newsletter content drafted from your blog output&nbsp;&mdash; curated, reframed, and written for inbox attention spans, keeping your list warm without additional production effort on your part.</p>
+        <div class="service-tags">
+          <span>List Nurturing</span><span>Content Repurposing</span>
+        </div>
+      </div>
+      <div class="service-card reveal">
+        <span class="service-number">08</span>
+        <h3>SEO Performance Reporting</h3>
+        <p>Monthly brief summarizing keyword movement, content performance observations, and three data-informed recommendations for the next cycle&nbsp;&mdash; so the strategy compounds intelligently over time.</p>
+        <div class="service-tags">
+          <span>Monthly Brief</span><span>Keyword Movement</span><span>Recommendations</span>
+        </div>
+      </div>
+      <div class="service-card reveal">
+        <span class="service-number">09</span>
+        <h3>Content Audit &amp; Gap Analysis</h3>
+        <p>A structured review of your existing content: what&rsquo;s ranking, what&rsquo;s cannibalizing, what&rsquo;s missing, and where the fastest SEO wins lie&nbsp;&mdash; delivered as a prioritized action plan before any production begins.</p>
+        <div class="service-tags">
+          <span>Gap Identification</span><span>Cannibalization Review</span><span>Priority Roadmap</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how-it-works" id="how">
+    <div class="section-header reveal">
+      <h2>The Process&nbsp;&mdash; From conversation to <em class="accent italic">published content</em></h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-number">01</div>
+        <div class="step-content">
+          <h3>Consult &amp; Scope</h3>
+          <p>A focused consultation to understand your business, audience, content goals, and existing presence. We identify which services create the most immediate leverage for your situation.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-number">02</div>
+        <div class="step-content">
+          <h3>Onboard &amp; Align</h3>
+          <p>Brand voice architecture built. Content audit completed if needed. Monthly calendar drafted and approved. All alignment happens before production&nbsp;&mdash; eliminating reactive revisions.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-number">03</div>
+        <div class="step-content">
+          <h3>Deliver &amp; Compound</h3>
+          <p>Publish-ready content delivered on a fixed schedule every month. Performance reviewed. Strategy refined. Your content presence compounds with each passing cycle.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE -->
+  <section class="quote-section">
+    <div class="container reveal">
+      <blockquote>&ldquo;The question is never whether you can afford consistent content. It&rsquo;s whether you can afford the compounding cost of remaining invisible.&rdquo;</blockquote>
+      <cite>SEO Authority Playbook&nbsp;&mdash; Founding Principle</cite>
+    </div>
+  </section>
+
+  <!-- WHY IT WORKS -->
+  <section class="why-section" id="why">
+    <div class="section-header reveal">
+      <h2>Why It Works&nbsp;&mdash; Built different. <em class="accent italic">Accountable</em> by design.</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 20V10M18 20V4M6 20v-4"/></svg>
+        </div>
+        <h3>SEO Architecture First</h3>
+        <p>Every piece begins with keyword research and PAA data extraction&nbsp;&mdash; not a blank prompt. Topic clusters and pillar strategy are built into the service at every tier, not added as an afterthought.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg>
+        </div>
+        <h3>Brand Voice That Actually Holds</h3>
+        <p>A structured Brand Voice Document&nbsp;&mdash; built from a detailed onboarding process&nbsp;&mdash; governs all output. Your content sounds like you before it reaches you, not after three frustrating revision rounds.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg>
+        </div>
+        <h3>Accountable Delivery System</h3>
+        <p>Fixed monthly calendar. Fixed delivery date. Documented service-level expectations. You know what&rsquo;s coming, when it arrives, and what to do with it&nbsp;&mdash; the clarity most content relationships never provide.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <h3>30 Years of Production Experience</h3>
+        <p>Underpinned by a background in data integrity consulting, applied systematically to content production. Every workflow, every deliverable, every quality check reflects how operators&nbsp;&mdash; not creatives&nbsp;&mdash; approach a system.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONSULTATION -->
+  <section class="consult-section" id="consult">
+    <div class="consult-grid">
+      <div class="consult-info reveal">
+        <h2>Individual Consultation&nbsp;&mdash; Let&rsquo;s find the right <em class="accent italic">combination</em> for your business.</h2>
+        <p>Every engagement starts with a conversation. No templates. No packages you didn&rsquo;t ask for. We identify exactly which services create the most leverage for your goals&nbsp;&mdash; and build around that.</p>
+        <ul>
+          <li>Free content audit included with every consultation</li>
+          <li>Service combination tailored to your publishing goals</li>
+          <li>Clear scope, clear expectations, clear deliverables</li>
+          <li>No commitment required from the first conversation</li>
+          <li>Response within one business day</li>
+        </ul>
+      </div>
+      <div class="consult-form-wrapper reveal">
+        <form id="consultForm">
+          <h3>Request Your Consultation</h3>
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Business Email</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="website">Business / Website URL</label>
+            <input type="text" id="website" name="website">
+          </div>
+          <div class="form-group">
+            <label for="interest">Primary Interest</label>
+            <select id="interest" name="interest" required>
+              <option value="" disabled selected>Select a service&hellip;</option>
+              <option>SEO Blog Content</option>
+              <option>Pillar Page &amp; Topic Cluster Strategy</option>
+              <option>Ghost-Written Ebooks &amp; Digital Assets</option>
+              <option>Content Calendar &amp; Monthly Strategy</option>
+              <option>Brand Voice Architecture</option>
+              <option>LinkedIn Content Adaptation</option>
+              <option>Email Newsletter Drafting</option>
+              <option>SEO Performance Reporting</option>
+              <option>Content Audit &amp; Gap Analysis</option>
+              <option>Multiple Services / Not Sure Yet</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Tell us briefly about your situation</label>
+            <textarea id="message" name="message"></textarea>
+          </div>
+          <button type="submit" class="btn-submit">Request Consultation &rarr;</button>
+          <div class="form-footer">We respond within one business day. No sales pressure.</div>
+        </form>
+        <div class="form-confirmation" id="formConfirmation">
+          <div class="check-icon">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h3>Thank you. We&rsquo;ll be in touch shortly.</h3>
+          <p>Your request has been received and is being reviewed. You can expect a personal response within one business day&nbsp;&mdash; no automated sequences, no sales scripts.</p>
+          <dl class="next-steps">
+            <dt>Next Step</dt>
+            <dd>We&rsquo;ll review your situation and reach out to schedule a focused consultation at your convenience.</dd>
+            <dt>What to Expect</dt>
+            <dd>A direct, no-pressure conversation about which services create the most leverage for your specific goals.</dd>
+            <dt>Response Time</dt>
+            <dd>Within one business day.</dd>
+          </dl>
+          <a href="#services" class="back-link">&larr; Explore the Services</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">SEO Authority <span>Playbook</span></div>
+      <div class="footer-note">All engagements begin with a consultation &middot; No standard packages</div>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => observer.observe(el));
+
+    // Trigger hero reveals immediately
+    document.querySelectorAll('.hero .reveal').forEach(el => {
+      el.classList.add('visible');
+    });
+
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('active');
+      navLinks.classList.toggle('open');
+    });
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        menuToggle.classList.remove('active');
+        navLinks.classList.remove('open');
+      });
+    });
+
+    // Form submission
+    const form = document.getElementById('consultForm');
+    const confirmation = document.getElementById('formConfirmation');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      try {
+        await fetch('https://formspree.io/f/xkoqvgpj', {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        });
+        form.style.display = 'none';
+        confirmation.classList.add('active');
+      } catch (err) {
+        form.style.display = 'none';
+        confirmation.classList.add('active');
+      }
+    });
+  </script>
+
+</body>
+</html>
