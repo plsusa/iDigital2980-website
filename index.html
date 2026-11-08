@@ -388,6 +388,40 @@
       margin-bottom: 1rem;
       display: block;
     }
+    .service-card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+    .service-card-arrow {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      border: 1px solid rgba(28,23,18,0.1);
+      transition: all 0.3s;
+      margin-left: 0.5rem;
+      margin-top: 0.2rem;
+    }
+    .service-card:hover .service-card-arrow {
+      background: var(--bronze);
+      border-color: var(--bronze);
+    }
+    .service-card-arrow svg {
+      width: 12px;
+      height: 12px;
+      stroke: rgba(28,23,18,0.4);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: stroke 0.3s;
+    }
+    .service-card:hover .service-card-arrow svg { stroke: var(--cream); }
     .service-card h3 {
       font-family: var(--font-display);
       font-size: 1.3rem;
@@ -917,7 +951,7 @@
     </div>
     <div class="services-grid">
       <div class="service-card reveal">
-        <span class="service-number">01</span>
+        <div class="service-card-header"><span class="service-number">01</span><span class="service-card-arrow"><svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></div>
         <h3>SEO-Optimized Blog Content</h3>
         <p>Research-first blog posts built around target keywords, people-also-ask data, and semantic entity mapping&nbsp;&mdash; formatted and ready to publish.</p>
         <div class="service-tags">
@@ -925,7 +959,7 @@
         </div>
       </div>
       <div class="service-card reveal">
-        <span class="service-number">02</span>
+        <div class="service-card-header"><span class="service-number">02</span><span class="service-card-arrow"><svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></div>
         <h3>Pillar Page &amp; Topic Cluster Strategy</h3>
         <p>Full topical authority architecture&nbsp;&mdash; pillar pages anchoring a mapped cluster of supporting content&nbsp;&mdash; so Google understands your site&rsquo;s expertise at depth.</p>
         <div class="service-tags">
@@ -933,7 +967,7 @@
         </div>
       </div>
       <div class="service-card reveal">
-        <span class="service-number">03</span>
+        <div class="service-card-header"><span class="service-number">03</span><span class="service-card-arrow"><svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></div>
         <h3>Ghost-Written Ebooks &amp; Digital Assets</h3>
         <p>Long-form ghost-written assets&nbsp;&mdash; ebooks, authority guides, lead magnets&nbsp;&mdash; suitable for self-publishing, gated downloads, or course companion materials. Your ideas, your name, your authority.</p>
         <div class="service-tags">
@@ -941,7 +975,7 @@
         </div>
       </div>
       <div class="service-card reveal">
-        <span class="service-number">04</span>
+        <div class="service-card-header"><span class="service-number">04</span><span class="service-card-arrow"><svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></div>
         <h3>Content Calendar &amp; Monthly Strategy</h3>
         <p>A structured monthly publishing roadmap aligned to your SEO goals, audience intent stages, and business objectives&nbsp;&mdash; delivered for approval before production begins.</p>
         <div class="service-tags">
@@ -949,7 +983,7 @@
         </div>
       </div>
       <div class="service-card reveal">
-        <span class="service-number">05</span>
+        <div class="service-card-header"><span class="service-number">05</span><span class="service-card-arrow"><svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></div>
         <h3>Brand Voice Architecture</h3>
         <p>A structured Brand Voice Document built during onboarding that governs all content production&nbsp;&mdash; tone parameters, vocabulary preferences, and audience framing&nbsp;&mdash; so every deliverable sounds forensically like you.</p>
         <div class="service-tags">
@@ -957,7 +991,7 @@
         </div>
       </div>
       <div class="service-card reveal">
-        <span class="service-number">06</span>
+        <div class="service-card-header"><span class="service-number">06</span><span class="service-card-arrow"><svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></div>
         <h3>LinkedIn Content Adaptation</h3>
         <p>Blog content repurposed into platform-native LinkedIn posts&nbsp;&mdash; each reframed for the LinkedIn algorithm, audience, and scroll context&nbsp;&mdash; turning one production cycle into multi-channel visibility.</p>
         <div class="service-tags">
@@ -965,7 +999,7 @@
         </div>
       </div>
       <div class="service-card reveal">
-        <span class="service-number">07</span>
+        <div class="service-card-header"><span class="service-number">07</span><span class="service-card-arrow"><svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></div>
         <h3>Email Newsletter Drafting</h3>
         <p>Monthly newsletter content drafted from your blog output&nbsp;&mdash; curated, reframed, and written for inbox attention spans, keeping your list warm without additional production effort on your part.</p>
         <div class="service-tags">
@@ -973,7 +1007,7 @@
         </div>
       </div>
       <div class="service-card reveal">
-        <span class="service-number">08</span>
+        <div class="service-card-header"><span class="service-number">08</span><span class="service-card-arrow"><svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></div>
         <h3>SEO Performance Reporting</h3>
         <p>Monthly brief summarizing keyword movement, content performance observations, and three data-informed recommendations for the next cycle&nbsp;&mdash; so the strategy compounds intelligently over time.</p>
         <div class="service-tags">
@@ -981,7 +1015,7 @@
         </div>
       </div>
       <div class="service-card reveal">
-        <span class="service-number">09</span>
+        <div class="service-card-header"><span class="service-number">09</span><span class="service-card-arrow"><svg viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></div>
         <h3>Content Audit &amp; Gap Analysis</h3>
         <p>A structured review of your existing content: what&rsquo;s ranking, what&rsquo;s cannibalizing, what&rsquo;s missing, and where the fastest SEO wins lie&nbsp;&mdash; delivered as a prioritized action plan before any production begins.</p>
         <div class="service-tags">
@@ -1098,7 +1132,7 @@
           <div class="form-group">
             <label for="interest">Primary Interest</label>
             <select id="interest" name="interest" required>
-              <option value="" disabled selected>Select a service&hellip;</option>
+              <option value="" disabled selected>Select a service area</option>
               <option>SEO Blog Content</option>
               <option>Pillar Page &amp; Topic Cluster Strategy</option>
               <option>Ghost-Written Ebooks &amp; Digital Assets</option>
@@ -1122,6 +1156,7 @@
           <div class="check-icon">
             <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
           </div>
+          <div class="hero-card-label" style="margin-bottom:0.5rem;">Consultation Request Received</div>
           <h3>Thank you. We&rsquo;ll be in touch shortly.</h3>
           <p>Your request has been received and is being reviewed. You can expect a personal response within one business day&nbsp;&mdash; no automated sequences, no sales scripts.</p>
           <dl class="next-steps">
@@ -1142,7 +1177,10 @@
   <footer>
     <div class="footer-inner">
       <div class="footer-logo">SEO Authority <span>Playbook</span></div>
-      <div class="footer-note">All engagements begin with a consultation &middot; No standard packages</div>
+      <div class="footer-note" style="text-align:right;">
+        <div style="margin-bottom:0.3rem;">Content Intelligence for Expert-Led Businesses</div>
+        <div>All engagements begin with a consultation &middot; No standard packages</div>
+      </div>
     </div>
   </footer>
 
